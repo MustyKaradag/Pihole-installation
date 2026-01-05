@@ -86,8 +86,8 @@ Install
   sudo apt install unbound -y
 ```
 
+Configure: Create the config file: 
 ```bash
-Configure: Create the config file:
   sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
 ```
 
