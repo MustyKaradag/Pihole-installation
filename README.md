@@ -81,13 +81,13 @@ Kod snippet'i
 
 server
 
-  <  interface: 127.0.0.1 >
-  <  port: 5335 >
-  <  do-ip4: yes >
-  <  do-udp: yes >
-  <  do-tcp: yes >
-  <  access-control: 127.0.0.0/8 allow >
-
+  -   interface: 127.0.0.1 
+  -   port: 5335 
+  -   do-ip4: yes 
+  -   do-udp: yes 
+  -   do-tcp: yes 
+  -   access-control: 127.0.0.0/8 allow 
+  
     
 Fix Conflicts & Restart
 
