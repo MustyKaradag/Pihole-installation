@@ -75,13 +75,14 @@ Bash
 sudo apt install unbound -y
 Configure: Create the config file: sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
 
-Paste Config:
+Config:
 
 Kod snippet'i
 
 server
-    interface: 127.0.0.1
-    port: 5335
+
+ interface: 127.0.0.1
+ port: 5335
     do-ip4: yes
     do-udp: yes
     do-tcp: yes
