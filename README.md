@@ -31,73 +31,40 @@ Always start with a fresh system:
 ```bash
 
 Before we install anything, we need to make sure your Raspberry Pi is fully up to date. Open your terminal (either via SSH or directly on the Pi) and run
-
 sudo apt update && sudo apt upgrade -y
 
+Step 1: Tailscale (Remote Access)
+Install Tailscale to access your Pi from anywhere without opening firewall ports.
 
-
-sudo apt update && sudo apt upgrade -y
-This might take a few minutes. Once finished, it’s a good idea to reboot: sudo reboot
-
-Step 1: Install Tailscale (Remote Access)
-What it is: A "Zero-Config" VPN. It lets you access your Pi (and its web dashboard) from your phone or laptop even when you aren't home, without opening dangerous ports on your router.
-
-Run the installer:
-
-
+Bash
 
 curl -fsSL https://tailscale.com/install.sh | sh
-Log in:
-
-
-
 sudo tailscale up
-Authenticate: It will give you a link. Copy that link into your browser, log in with your account (Google, Microsoft, etc.), and your Pi is now part of your private network.
+Step 2: btop (Monitoring)
+A visual monitor for your CPU, RAM, and Network.
 
-Step 2: Install btop (The "Dashboard")
-What it is: A beautiful, terminal-based resource monitor. It shows you your CPU usage, RAM, and network speeds in real-time.
-
-Install it directly from the repository:
-
-
+Bash
 
 sudo apt install btop -y
-Run it: Just type btop.
+Step 3: Pi-hole (Ad-Blocking)
+The network-wide ad blocker.
 
-Tip: Use your mouse to click on things in the interface, or press q to quit.
+Bash
 
-Step 3: Install Pi-hole (The Ad-Blocker)
-What it is: A "DNS sinkhole" that blocks ads and trackers for every device on your network.
+curl -sSL https://install.pi-hole.net | bash
+Note: Follow the on-screen prompts. Choose a static IP and save your admin password at the end!
 
-Run the automated installer:
+Step 4: Unbound (Privacy DNS)
+This prevents big-tech companies from seeing your DNS queries.
 
+Install:
 
-
-curl -sSL https://install.pi-hole.net | 
-Follow the Blue Screens:
-
-Most default options are fine.
-
-Static IP: When it asks about a static IP, say Yes (it needs this to stay at the same address).
-
-Upstream DNS: Choose "Google" or "Cloudflare" for now—we will change this to Unbound later.
-
-Finish & Save Credentials: At the end, it will show you an Admin Password. Write this down! You’ll need it to log into http://<your-pi-ip>/admin.
-
-Step 4: Install Unbound (Privacy Resolver)
-What it is: Instead of Pi-hole asking Google "Where is google.com?", Unbound asks the "Root Servers" directly. This means no single company sees your entire browsing history.
-
-Install the package:
-
-
+Bash
 
 sudo apt install unbound -y
-Configure it: You need to create a specific configuration file for Pi-hole.
+Configure: Create the config file: sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
 
-
-
-sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
-Paste this exact text into that window (Right-click to paste in most terminals):
+Paste Config:
 
 Kod snippet'i
 
@@ -108,38 +75,30 @@ server:
     do-udp: yes
     do-tcp: yes
     access-control: 127.0.0.0/8 allow
-(Press Ctrl+O, then Enter to save, and Ctrl+X to exit.)
+Fix Conflicts & Restart:
 
-Fix a common Debian conflict: Modern Raspberry Pi OS has a service that can break Unbound. Run these to disable it:
-
-
+Bash
 
 sudo systemctl disable --now unbound-resolvconf.service
 sudo sed -Ei 's/^unbound_conf=/#unbound_conf=/' /etc/resolvconf.conf
 sudo rm /etc/unbound/unbound.conf.d/resolvconf_resolvers.conf
-Restart Unbound:
-
-
-
 sudo systemctl restart unbound
-Step 5: Connecting the Pieces
-Now we need to tell Pi-hole to use Unbound (which is living at port 5335) instead of the internet.
+Step 5: Final Configuration
+Connect Pi-hole to Unbound:
 
-Open your browser and go to your Pi-hole Admin Dashboard (e.g., http://192.168.1.XX/admin or your Tailscale IP).
+Navigate to your Pi-hole Admin Web Interface.
 
-Log in and go to Settings > DNS.
+Go to Settings > DNS.
 
-Uncheck everything under "Upstream DNS Servers" (Google, OpenDNS, etc.).
+Uncheck all public DNS providers.
 
-On the right side, under Custom 1 (IPv4), type: 127.0.0.1#5335
+Add 127.0.0.1#5335 to Custom 1 (IPv4).
 
-Scroll to the bottom and click Save.
+Click Save.
 
-Final Check
-To make sure everything is working:
+📊 Monitoring
+To check your system status at any time, simply run:
 
-Open btop on your Pi and watch the network traffic.
+Bash
 
-On your Router, set your DNS server to the IP address of your Raspberry Pi.
-
-On your Tailscale Admin Console, you can go to DNS and add your Pi's Tailscale IP as a "Global Nameserver" to get ad-blocking on your phone while you're out!
+btop
