@@ -1,7 +1,6 @@
 # Pihole-installation
 Welcome to the world of self-hosting! This setup is a classic "HomeLab" foundation. By the end of this guide, you’ll have a device that blocks ads, protects your privacy by not using big-tech DNS, and lets you access your home network securely from anywhere in the world.
 
-Welcome to the world of self-hosting! This setup is a classic "HomeLab" foundation. By the end of this guide, you’ll have a device that blocks ads, protects your privacy by not using big-tech DNS, and lets you access your home network securely from anywhere in the world.
 
 Step 0: The Preparation
 Before we install anything, we need to make sure your Raspberry Pi is fully up to date. Open your terminal (either via SSH or directly on the Pi) and run:
