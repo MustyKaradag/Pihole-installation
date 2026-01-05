@@ -28,10 +28,9 @@ A beginner-friendly guide to setting up a privacy-focused network with Ad-blocki
 
 ### Step 0: System Update
 Always start with a fresh system:
-```bash
-
 Before we install anything, we need to make sure your Raspberry Pi is fully up to date. Open your terminal (either via SSH or directly on the Pi) and run
 sudo apt update && sudo apt upgrade -y
+
 
 Step 1: Tailscale (Remote Access)
 Install Tailscale to access your Pi from anywhere without opening firewall ports.
@@ -100,5 +99,8 @@ Click Save.
 To check your system status at any time, simply run:
 
 Bash
+Btop
+
+```bash
 
 btop
