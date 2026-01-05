@@ -28,8 +28,10 @@ A beginner-friendly guide to setting up a privacy-focused network with Ad-blocki
 
 ### Step 0: System Update
 Always start with a fresh system:
-Before we install anything, we need to make sure your Raspberry Pi is fully up to date. Open your terminal (either via SSH or directly on the Pi) and run
-sudo apt update && sudo apt upgrade -y
+Before we install anything, we need to make sure your Raspberry Pi is fully up to date. 
+Open your terminal (either via SSH or directly on the Pi) and run,
+
+- sudo apt update && sudo apt upgrade -y
 
 
 ---
@@ -39,8 +41,8 @@ Install Tailscale to access your Pi from anywhere without opening firewall ports
 
 Bash
 
-curl -fsSL https://tailscale.com/install.sh | sh
-sudo tailscale up
+- curl -fsSL https://tailscale.com/install.sh | sh
+- sudo tailscale up
 
 
 ---
@@ -60,8 +62,8 @@ The network-wide ad blocker.
 
 Bash
 
-curl -sSL https://install.pi-hole.net | bash
-Note: Follow the on-screen prompts. Choose a static IP and save your admin password at the end!
+- curl -sSL https://install.pi-hole.net | bash
+- Note: Follow the on-screen prompts. Choose a static IP and save your admin password at the end!
 
 ---
 
@@ -72,8 +74,8 @@ Install
 
 Bash
 
-sudo apt install unbound -y
-Configure: Create the config file: sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
+- sudo apt install unbound -y
+- Configure: Create the config file: sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
 
 Config:
 
@@ -93,10 +95,10 @@ Fix Conflicts & Restart
 
 Bash
 
-sudo systemctl disable --now unbound-resolvconf.service
-sudo sed -Ei 's/^unbound_conf=/#unbound_conf=/' /etc/resolvconf.conf
-sudo rm /etc/unbound/unbound.conf.d/resolvconf_resolvers.conf
-sudo systemctl restart unbound
+- sudo systemctl disable --now unbound-resolvconf.service
+- sudo sed -Ei 's/^unbound_conf=/#unbound_conf=/' /etc/resolvconf.conf
+- sudo rm /etc/unbound/unbound.conf.d/resolvconf_resolvers.conf
+- sudo systemctl restart unbound
 
 
 ---
