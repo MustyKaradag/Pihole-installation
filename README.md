@@ -45,8 +45,8 @@ Install Tailscale to access your Pi from anywhere without opening firewall ports
 
 ```bash
 
-- curl -fsSL https://tailscale.com/install.sh | sh
-- sudo tailscale up
+  curl -fsSL https://tailscale.com/install.sh | sh
+  sudo tailscale up
 ```
 
 ---
@@ -56,7 +56,8 @@ A visual monitor for your CPU, RAM, and Network.
 
 ```bash
 
-sudo apt install btop -y
+  sudo apt install btop -y
+
 ```
 
 ---
@@ -66,9 +67,12 @@ The network-wide ad blocker.
 
 ```bash
 
-- curl -sSL https://install.pi-hole.net | bash
-- Note: Follow the on-screen prompts. Choose a static IP and save your admin password at the end!
+   curl -sSL https://install.pi-hole.net | bash
+   
 ```
+Note: Follow the on-screen prompts. Choose a static IP and save your admin password at the end!
+
+
 
 ---
 
@@ -79,8 +83,12 @@ Install
 
 ```bash
 
-- sudo apt install unbound -y
-- Configure: Create the config file: sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
+  sudo apt install unbound -y
+```
+
+```bash
+Configure: Create the config file:
+  sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
 ```
 
 Config:
@@ -89,22 +97,22 @@ Kod snippet'i
 
 server
 ```bash
-  -   interface: 127.0.0.1 
-  -   port: 5335 
-  -   do-ip4: yes 
-  -   do-udp: yes 
-  -   do-tcp: yes 
-  -   access-control: 127.0.0.0/8 allow 
+     interface: 127.0.0.1 
+     port: 5335 
+     do-ip4: yes 
+     do-udp: yes 
+     do-tcp: yes 
+     access-control: 127.0.0.0/8 allow 
   ```
     
 Fix Conflicts & Restart
 
 ```bash
 
-- sudo systemctl disable --now unbound-resolvconf.service
-- sudo sed -Ei 's/^unbound_conf=/#unbound_conf=/' /etc/resolvconf.conf
-- sudo rm /etc/unbound/unbound.conf.d/resolvconf_resolvers.conf
-- sudo systemctl restart unbound
+ sudo systemctl disable --now unbound-resolvconf.service
+ sudo sed -Ei 's/^unbound_conf=/#unbound_conf=/' /etc/resolvconf.conf
+ sudo rm /etc/unbound/unbound.conf.d/resolvconf_resolvers.conf
+ sudo systemctl restart unbound
 ```
 
 ---
