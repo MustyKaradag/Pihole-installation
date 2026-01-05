@@ -3,7 +3,36 @@ Welcome to the world of self-hosting! This setup is a classic "HomeLab" foundati
 
 
 Step 0: The Preparation
-Before we install anything, we need to make sure your Raspberry Pi is fully up to date. Open your terminal (either via SSH or directly on the Pi) and run:
+
+# 🥧 Raspberry Pi HomeLab Setup Guide
+A beginner-friendly guide to setting up a privacy-focused network with Ad-blocking, a Private DNS resolver, and Remote Access.
+
+## 📋 Table of Contents
+- [Prerequisites](#-prerequisites)
+- [Step 1: Tailscale (Remote Access)](#step-1-tailscale-remote-access)
+- [Step 2: btop (Monitoring)](#step-2-btop-monitoring)
+- [Step 3: Pi-hole (Ad-Blocking)](#step-3-pi-hole-ad-blocking)
+- [Step 4: Unbound (Privacy DNS)](#step-4-unbound-privacy-dns)
+- [Step 5: Final Configuration](#step-5-final-configuration)
+
+---
+
+## 🛠 Prerequisites
+- Raspberry Pi (running Raspberry Pi OS / Debian)
+- Basic knowledge of the Terminal (SSH)
+- A Tailscale account (Free)
+
+---
+
+## 🚀 Installation Steps
+
+### Step 0: System Update
+Always start with a fresh system:
+```bash
+
+Before we install anything, we need to make sure your Raspberry Pi is fully up to date. Open your terminal (either via SSH or directly on the Pi) and run
+
+sudo apt update && sudo apt upgrade -y
 
 
 
