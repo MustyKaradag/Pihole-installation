@@ -68,7 +68,7 @@ Note: Follow the on-screen prompts. Choose a static IP and save your admin passw
 ## Step 4: Unbound (Privacy DNS)
 This prevents big-tech companies from seeing your DNS queries.
 
-Install:
+Install
 
 Bash
 
@@ -79,14 +79,16 @@ Paste Config:
 
 Kod snippet'i
 
-server:
+server
     interface: 127.0.0.1
     port: 5335
     do-ip4: yes
     do-udp: yes
     do-tcp: yes
     access-control: 127.0.0.0/8 allow
-Fix Conflicts & Restart:
+
+    
+Fix Conflicts & Restart
 
 Bash
 
