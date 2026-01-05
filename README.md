@@ -31,7 +31,8 @@ Always start with a fresh system:
 Before we install anything, we need to make sure your Raspberry Pi is fully up to date. 
 Open your terminal (either via SSH or directly on the Pi) and run,
 
-- sudo apt update && sudo apt upgrade -y
+- sudo apt update
+- sudo apt upgrade -y
 
 
 ---
