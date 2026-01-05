@@ -32,20 +32,30 @@ Before we install anything, we need to make sure your Raspberry Pi is fully up t
 sudo apt update && sudo apt upgrade -y
 
 
-Step 1: Tailscale (Remote Access)
+---
+
+## Step 1: Tailscale (Remote Access)
 Install Tailscale to access your Pi from anywhere without opening firewall ports.
 
 Bash
 
 curl -fsSL https://tailscale.com/install.sh | sh
 sudo tailscale up
-Step 2: btop (Monitoring)
+
+
+---
+
+## Step 2: btop (Monitoring)
 A visual monitor for your CPU, RAM, and Network.
 
 Bash
 
 sudo apt install btop -y
-Step 3: Pi-hole (Ad-Blocking)
+
+
+---
+
+## Step 3: Pi-hole (Ad-Blocking)
 The network-wide ad blocker.
 
 Bash
@@ -53,7 +63,9 @@ Bash
 curl -sSL https://install.pi-hole.net | bash
 Note: Follow the on-screen prompts. Choose a static IP and save your admin password at the end!
 
-Step 4: Unbound (Privacy DNS)
+---
+
+## Step 4: Unbound (Privacy DNS)
 This prevents big-tech companies from seeing your DNS queries.
 
 Install:
@@ -82,7 +94,11 @@ sudo systemctl disable --now unbound-resolvconf.service
 sudo sed -Ei 's/^unbound_conf=/#unbound_conf=/' /etc/resolvconf.conf
 sudo rm /etc/unbound/unbound.conf.d/resolvconf_resolvers.conf
 sudo systemctl restart unbound
-Step 5: Final Configuration
+
+
+---
+
+## Step 5: Final Configuration
 Connect Pi-hole to Unbound:
 
 Navigate to your Pi-hole Admin Web Interface.
@@ -94,6 +110,9 @@ Uncheck all public DNS providers.
 Add 127.0.0.1#5335 to Custom 1 (IPv4).
 
 Click Save.
+
+---
+
 
 📊 Monitoring
 To check your system status at any time, simply run:
